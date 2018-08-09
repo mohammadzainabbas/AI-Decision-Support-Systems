@@ -1,0 +1,16 @@
+def A_Star(g, s_node, g_node, priority = 0, path = []):
+    pq = queue.PriorityQueue();
+    pq.put((priority, (s_node, 0)));
+    while(not pq.empty()):
+        u = pq.get();
+        pq = queue.PriorityQueue();
+        if u[1][0] == g_node:
+            path.append(g_node);
+            return path;
+        else:
+            for v in g[u[1][0]]:
+                if v not in path:
+                    edge_cost = g[u[1][0]][v];
+                    pq.put(( u[1][1] + edge_cost + heuristic[v], (v, u[1][1] + edge_cost )));
+        path.append(u[1][0]);
+    return path;
